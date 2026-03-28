@@ -1,0 +1,41 @@
+services:
+  backend:
+    build: .
+    image: clipmind-backend:dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ${CLIPMIND_VIDEO_DIR:-.}:/videos:ro
+      - /Users:/Users:ro
+    env_file:
+      - .env
+    environment:
+      - CLIPMIND_VIDEO_DIR=/videos
+      - CLIPMIND_DATABASE_URL=sqlite:////app/data/clipmind.db
+      - CLIPMIND_CORS_ORIGINS=http://localhost:3000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    image: clipmind-frontend:dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+    environment:
+      - NEXT_PUBLIC_API_URL=
+      - API_BACKEND_URL=http://backend:8000
+      - WATCHPACK_POLLING=true
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped

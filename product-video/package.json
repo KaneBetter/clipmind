@@ -1,0 +1,30 @@
+{
+  "name": "clipmind-product-video",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "record": "tsx scripts/record-screens.ts",
+    "capture": "tsx scripts/capture-all.ts",
+    "capture:screenshots": "tsx scripts/capture-screenshots.ts",
+    "preview": "remotion studio",
+    "render": "remotion render src/index.ts ClipMindDemo out/clipmind-demo.mp4",
+    "build": "npm run record && npm run render"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.267",
+    "@remotion/player": "4.0.267",
+    "@remotion/transitions": "4.0.267",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "4.0.267"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.0",
+    "playwright": "^1.50.0",
+    "@remotion/renderer": "4.0.267",
+    "@types/react": "^19",
+    "typescript": "^5",
+    "tsx": "^4.0.0"
+  }
+}

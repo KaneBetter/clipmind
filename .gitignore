@@ -1,0 +1,51 @@
+# Environment — never commit secrets
+.env
+.env.local
+.env.*.local
+
+# User data — contains personal video paths, GPS, thumbnails, DB
+data/
+.cache/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+*.egg
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+.npm/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Docker overrides
+docker-compose.override.yml
+
+# Logs
+*.log
+logs/
+
+# Test coverage
+.coverage
+htmlcov/
+coverage.xml
+
+# Remotion / product-video build outputs and recordings
+product-video/out/
+product-video/public/recordings/
